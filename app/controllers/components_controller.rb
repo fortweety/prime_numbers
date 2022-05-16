@@ -7,7 +7,7 @@ class ComponentsController < ApplicationController
     )
 
     if result.success?
-      render json: { data: result.prime_numbers }
+      render json: { data: result.circle_prime_numbers }
     else
       error_response(result.errors, :unprocessable_entity)
     end
