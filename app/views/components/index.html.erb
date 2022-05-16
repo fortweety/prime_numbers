@@ -1,0 +1,36 @@
+<p> input a number(X) in a form and get the list of circular prime numbers between 1 and that number(X) </p>
+
+<input id="prime" type="number" />
+<button id="submit"> get numbers </button>
+<div id='result'> </div>
+
+<script>
+  const submitButton = document.querySelector('#submit');
+  const inputField = document.querySelector('#prime');
+
+  submitButton.addEventListener('click', () => {
+    let number = inputField.value;
+    if (number.length > 0) {
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        data: {
+          number: number
+        },
+        url: "/prime_numbers",
+        success: function(data){
+          const result = document.querySelector('#result');
+          result.textContent = '';
+          let div = document.createElement("div");
+          div.innerText = data.data.join();
+          result.append(div);
+        },
+        error: function(err) {
+          console.log(err.errors)
+        }
+      })
+    } else {
+      alert('please type a number to get list of prime numbers')
+    }
+  })
+</script>
